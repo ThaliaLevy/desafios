@@ -1,16 +1,24 @@
 package outros;
 
+import java.text.DecimalFormat;
+
 public class main {
 
 	public static void main(String[] args) {
 		dadosEstatisticos de = new dadosEstatisticos();
-		double[] vetorResultado;
-		double[] vetorExemploEntrada = {1, 2, 2, 4, 2, 1, 8};
-		
+		String[] vetorResultado;
+		double[] vetorExemploEntrada = { 9, 10, 1, 4, 7, 7, 9, 1, 8 };
+		DecimalFormat df = new DecimalFormat("#.#");
+
 		vetorResultado = de.verificarDado(vetorExemploEntrada);
-		
-		for(int i = 0; i < vetorExemploEntrada.length; i++) {
-			//System.out.println(vetorResultado[i]);
+
+		System.out.println("Média" + "\t" + "Mediana" + "\t" + "Moda");
+		for (int i = 0; i < vetorResultado.length; i++) {
+			if (i != vetorResultado.length-1) {
+				System.out.print(df.format(Double.parseDouble(vetorResultado[i])) + "\t");
+			} else {
+				System.out.print(vetorResultado[i] + "\t");
+			}
 		}
 	}
 }

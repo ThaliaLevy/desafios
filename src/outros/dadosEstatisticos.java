@@ -1,108 +1,38 @@
 package outros;
 
-import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.OptionalDouble;
 import java.util.Set;
 
 public class dadosEstatisticos {
-	public double[] verificarDado(double[] vetor) {
-		double[] vetorResposta = new double[3];
+	public String[] verificarDado(double[] vetor) {
+		String[] vetorResposta = new String[3];
 
-		// reordenar valores - crescente
+		// reordenar valores de entrada - crescente
 		Arrays.sort(vetor);
 
 		// calcular media
-		vetorResposta[0] = calcularMedia(vetor);
+		vetorResposta[0] = calcularMedia(vetor) + "";
 
 		// verificar mediana
-		vetorResposta[1] = verificarMediana(vetor);
+		vetorResposta[1] = verificarMediana(vetor) + "";
 
 		// verificar moda
-		int contador = 0;
-		double valoresAntigos[] = new double[vetor.length];
-		double novosValores[] = new double[vetor.length];
-
-		for (int i = 0; i < vetor.length; i++) {
-			contador = 0;
-			for (int j = 0; j < vetor.length; j++) {
-				if (vetor[i] == vetor[j]) {
-					contador++;
+		Integer[] resultadoModa = verificarModa(vetor);
+		String moda = "";
+		for (int i = 0; i < resultadoModa.length; i++) {
+			if (resultadoModa[i] != 0) {
+				if(i == resultadoModa.length-1) {
+					moda = moda + resultadoModa[i] + " ";
+				}else {
+					moda = moda + resultadoModa[i] + ", ";
 				}
 			}
-			valoresAntigos[i] = contador;
-			novosValores[i] = contador;
-			System.out.print(" " + contador);
+			
 		}
+		vetorResposta[2] = moda;
 
-		// colocando vetor em ordem para localizar a maior quantidade de vezes repetidas
-		Arrays.sort(novosValores);
-		String maiorRepeticao = (int) novosValores[novosValores.length - 1] + "";
-
-		// convertendo em string para conseguir utilizar o indexof e achar o indice
-		String valoresAntigosString = valoresAntigos + "";
-		int indiceMaiorRepeticao = valoresAntigosString.indexOf(maiorRepeticao);
-		System.out.println(indiceMaiorRepeticao);
-
-		// utilizando o index encontrado para achar o indice correspondente no vetor de
-		// valores
-		String v = vetor + "";
-
-		// System.out.println(vetor[5]);
-		
-		// restringindo o numero de visualiza��o decimal
-		DecimalFormat df = new DecimalFormat(".##");
 		return vetorResposta;
-
-		/*
-		 * for (int i = 0; i < vetor.length; i++) { // System.out.print(" " + vetor[i]);
-		 * }
-		 * 
-		 * // convertendo double para int int v[] = new int[vetor.length]; for (int i =
-		 * 0; i < vetor.length; i++) { v[i] = (int) Math.round(vetor[i]); }
-		 * 
-		 * int d = 0;
-		 * 
-		 * // retirando os repetidos Set<Integer> set = new HashSet<>(); for (int a : v)
-		 * {
-		 * 
-		 * set.add(a); v[d] = a;
-		 * 
-		 * System.out.print(" " + v[d]);d++; }
-		 * 
-		 * for (int i = 0; i < vetor.length; i++) {
-		 * 
-		 * }
-		 * 
-		 * Set<Integer> carlos = set; System.out.println("\n"+ carlos);
-		 * 
-		 * 
-		 * for (int i = 0; i < v.length; i++) { //
-		 * System.out.println(valoresAntigos[i]); }
-		 * 
-		 * for (int i = 0; i < v.length; i++) { for (int j = 0; j < vetor.length; j++) {
-		 * if (v[i] == vetor[j]) { contador++; }else { break; } } valoresAntigos[i] =
-		 * contador; System.out.println("valoresAntigos[i] " + valoresAntigos[i]);
-		 * contador = 0; }
-		 * 
-		 * double[] valoresAntigos = new double[10]; for (int i = 0; i < vetor.length;
-		 * i++) { for (int j = i + 1; j < vetor.length; j++) { if (vetor[i] == vetor[j])
-		 * {
-		 * 
-		 * // System.out.println("contador " + contador); //
-		 * System.out.println("valor j " + vetor[j]); contador++;
-		 * 
-		 * // System.out.println("contador " + contador); } }
-		 * 
-		 * 
-		 * }
-		 * 
-		 * for(int i = 0; i < valoresAntigos.length; i++) { //
-		 * System.out.println(vetor[i]); } //
-		 * System.out.println(df.format(vetorResposta[0])); //
-		 * System.out.println(df.format(vetorResposta[1])); return vetorResposta;
-		 */
 	}
 
 	public double calcularMedia(double[] vetor) {
@@ -111,7 +41,6 @@ public class dadosEstatisticos {
 		for (int i = 0; i < vetor.length; i++) {
 			resultadoMedia = resultadoMedia + vetor[i];
 		}
-
 		return resultadoMedia / vetor.length;
 	}
 
@@ -125,5 +54,52 @@ public class dadosEstatisticos {
 			int meio = vetor.length / 2;
 			return vetor[meio];
 		}
+	}
+
+	public Integer[] verificarModa(double[] vetor) {
+		int contador = 0, maiorOcorrencia = 0;
+		String[] ocorrencias = new String[vetor.length];
+
+		// contar quantidade de repetições de cada valor
+		for (int i = 0; i < vetor.length; i++) {
+			for (int j = 0; j < vetor.length; j++) {
+				if (vetor[i] == vetor[j]) {
+					contador++;
+				}
+			}
+			ocorrencias[i] = contador + "";
+			contador = 0;
+		}
+
+		// verificar a maior quantidade de repetições
+		for (int i = 0; i < ocorrencias.length; i++) {
+			if (i + 1 != ocorrencias.length) {
+				int valorI = Integer.parseInt(ocorrencias[i]), valorJ = Integer.parseInt(ocorrencias[i + 1]);
+				if (valorI > valorJ) {
+					maiorOcorrencia = valorI;
+				}
+			}
+		}
+
+		// guardar todos os valores do vetor ordenado que possuem a maior quantidade de
+		// repetições
+		double[] guardar = new double[ocorrencias.length];
+		int indice = 0;
+		for (int i = 0; i < vetor.length; i++) {
+			int todasOcorrencias = Integer.parseInt(ocorrencias[i]);
+			if (maiorOcorrencia == todasOcorrencias) {
+				guardar[indice] = (int) vetor[i];
+				indice++;
+			}
+		}
+
+		// limpando "quantidade de repetições" que mostram mais de uma vez
+		Set<Integer> set = new HashSet<>();
+		for (double a : guardar) {
+			set.add((int) a);
+		}
+		Integer[] jb = set.toArray(new Integer[set.size()]);
+
+		return jb;
 	}
 }
