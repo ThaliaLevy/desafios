@@ -1,4 +1,4 @@
-package outros;
+package moda_media_mediana;
 
 import java.util.Arrays;
 import java.util.HashSet;

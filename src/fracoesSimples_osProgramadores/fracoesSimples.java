@@ -1,4 +1,4 @@
-package osProgramadores;
+package fracoesSimples_osProgramadores;
 import java.util.Scanner;
 
 public class fracoesSimples {
@@ -8,7 +8,7 @@ public class fracoesSimples {
 
 		int numerador, denominador, resto, resultadoDivisao;
 
-		System.out.println("Digite a fração que deseja simplificar (obs.: com a /): ");
+		System.out.println("Digite a fraï¿½ï¿½o que deseja simplificar (obs.: com a /): ");
 		String fracaoRecebida = ler.nextLine();
 		String vetor[] = fracaoRecebida.split("/");
 

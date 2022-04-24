@@ -1,4 +1,4 @@
-package outros;
+package moda_media_mediana;
 
 import java.text.DecimalFormat;
 
