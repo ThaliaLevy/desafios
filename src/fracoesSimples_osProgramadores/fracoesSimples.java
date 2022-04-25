@@ -8,7 +8,7 @@ public class fracoesSimples {
 
 		int numerador, denominador, resto, resultadoDivisao;
 
-		System.out.println("Digite a fra��o que deseja simplificar (obs.: com a /): ");
+		System.out.println("Digite a fração que deseja simplificar (obs.: com a /): ");
 		String fracaoRecebida = ler.nextLine();
 		String vetor[] = fracaoRecebida.split("/");
 
