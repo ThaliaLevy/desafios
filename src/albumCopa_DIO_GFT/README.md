@@ -21,8 +21,6 @@
 <p>Seu programa deve produzir uma única linha contendo um inteiro representando o número de figurinhas que falta para completar o álbum.</p>
 </div>
 
-<div>&nbsp;</div>
-
 <table>
 	<thead>
 		<tr>
@@ -46,9 +44,12 @@
 	</tbody>
 </table>
 
-<div>
 <table>
 	<thead>
+		<tr>
+			<td>Exemplos de Entrada</td>
+			<td>Exemplos de Saída</td>
+		</tr>
 	</thead>
 	<tbody>
 		<tr>
@@ -66,6 +67,5 @@
 		</tr>
 	</tbody>
 </table>
-</div>
 
 <p>&nbsp;</p> <br><br></div>
